@@ -2,29 +2,30 @@
 
 //CRUD - Create Read Update Delete
 //Создание нового пользователя (Create)
-function DBCreateUser($Name,$Email,$Age) {
+function DBCreateVacancy($Name,$Cena,$Opisanie,$Rabota) {
 	//Предотвращение SQL-инъекций
 	$Name=_DBEscString($Name);
-	$Email=_DBEscString($Email);
-	$Age=(int)$Age;
+	$Opisanie=_DBEscString($Opisanie);
+	$Rabota=(int)($Rabota);
+	$Cena=(int)$Cena;
 	
 	//Выполнение запроса к БД
 	_DBQuery("
-		INSERT INTO Users(Name,Email,Age)
-		VALUES ('$Name','$Email','$Age')
+		INSERT INTO vacancy(Nazvanie,salary,duty,Opisanie)
+		VALUES ('$Name','$Cena','$Rabota','$Opisanie')
 	");
 }
 
 //Получение одного пользователя (Read)
-function DBGetUser($id) {
+function DBGetVacancyOne($id) {
 	//Предотвращение SQL-инъекций
 	$id=(int)$id;
 	//Выполнение запроса
-	return _DBGetQuery("SELECT * FROM users WHERE ID=$id");
+	return _DBGetQuery("SELECT * FROM vacancy WHERE ID=$id");
 }
 
 //Получение списка пользователей (Read)
-function DBFetchUser($search_string,$sort,$dir,$s,$l) {
+function DBFetchVacancy($search_string,$sort,$dir,$s,$l) {
 	//Предотвращение SQL-инъекций
 	$search_string=_DBEscString($search_string);
 	$sort=(int)$sort;
@@ -38,7 +39,7 @@ function DBFetchUser($search_string,$sort,$dir,$s,$l) {
 	$where_like="";
 	if(trim($search_string)!="") {
 		$search_string=_DBEscString($search_string);
-		$where_like="WHERE Name LIKE \"%$search_string%\"";
+		$where_like="WHERE Nazvanie LIKE \"%$search_string%\"";
 	}
 
 	$order="";
@@ -46,39 +47,41 @@ function DBFetchUser($search_string,$sort,$dir,$s,$l) {
 		$order="ORDER BY ".((int)$sort+2)." $dir";	
 	
 	//Выполнение запроса
-	return _DBFetchQuery("SELECT * FROM users $where_like $order $limit");
+	return _DBFetchQuery("SELECT * FROM vacancy $where_like $order $limit");
 }
 
 //Подсчёт общего числа пользователей в базе (Read)
-function DBCountAllUsers() { 
-	return _DBRowsCount(_DBQuery("SELECT * from users"));
+function DBCountAllVacancy() { 
+	return _DBRowsCount(_DBQuery("SELECT * from vacancy"));
 }
 
 //Редактирование элемента (Update)
-function DBUpdateUser($id,$Name,$Email,$Age) {
+function DBUpdateVacancy($id,$Name,$Cena,$Opisanie,$Rabota) {
 	//Предотвращение SQL-инъекций
 	$id=(int)$id;
 	$Name=_DBEscString($Name);
-	$Email=_DBEscString($Email);
-	$Age=(int)$Age;
+	$Opisanie=_DBEscString($Opisanie);
+	$Rabota=(int)($Rabota);
+	$Cena=(int)$Cena;
 	
 	//Выполнение запроса	
 	_DBQuery("
-		UPDATE Users 
-		SET	Name='$Name',
-			Email='$Email',
-			Age='$Age'
+		UPDATE vacancy 
+		SET	Nazvanie='$Name',
+		salary='$Cena',
+		duty='$Rabota',
+		Opisanie='$Opisanie'
 		WHERE 
 			ID=$id
 	");
 }
 
 //Удаление элемента (Delete)
-function DBDeleteUser($id) {
+function DBDeleteVacancy($id) {
 	//Предотвращение SQL-инъекций
 	$id=(int)$id;
 	
 	//Выполнение запроса
-	_DBQuery("DELETE FROM Users WHERE id=$id");
+	_DBQuery("DELETE FROM vacancy WHERE id=$id");
 }
 
