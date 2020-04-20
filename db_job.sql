@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 13 2020 г., 01:35
+-- Время создания: Апр 20 2020 г., 19:41
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -57,14 +57,17 @@ CREATE TABLE IF NOT EXISTS `vacancy` (
   `duty` int(11) DEFAULT NULL,
   `Opisanie` text,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Дамп данных таблицы `vacancy`
 --
 
 INSERT INTO `vacancy` (`ID`, `Nazvanie`, `salary`, `duty`, `Opisanie`) VALUES
-(1, 'Name1', 123, 2, 'Opisanie');
+(1, 'Name1', 123, 2, 'Opisanie'),
+(3, 'Name2', 123, 2, 'ererrererr'),
+(4, 'Name3', 233, 3, 'sdsdsd'),
+(5, 'Name4', 133, 3, 'sdsdsd');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
