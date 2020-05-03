@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 20 2020 г., 19:41
+-- Время создания: Май 03 2020 г., 19:30
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -19,8 +19,34 @@ SET time_zone = "+00:00";
 --
 -- База данных: `db_job`
 --
-CREATE DATABASE `db_job` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `db_job`;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `resume`
+--
+
+CREATE TABLE IF NOT EXISTS `resume` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fio` varchar(200) NOT NULL,
+  `dolzhnost` varchar(2000) NOT NULL,
+  `date` date NOT NULL,
+  `opit` varchar(200) NOT NULL,
+  `zarplata` varchar(200) NOT NULL,
+  `opisanie` varchar(2000) NOT NULL,
+  `grafic` varchar(10) NOT NULL,
+  `telephone` varchar(12) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Дамп данных таблицы `resume`
+--
+
+INSERT INTO `resume` (`id`, `fio`, `dolzhnost`, `date`, `opit`, `zarplata`, `opisanie`, `grafic`, `telephone`) VALUES
+(1, 'Иванов', 'Сантехник', '2020-05-03', '2 года', '20 000 тыс р', 'Образование среднее-специальное г Челябинск', '5-2', '899999999'),
+(2, 'Сидорова', 'Учитель', '2020-01-05', '10 лет', '30 тыс р', 'Опыт работы с начальными классами в г Челябинск, высшее образование', '5-2', '1111111');
 
 -- --------------------------------------------------------
 
@@ -57,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `vacancy` (
   `duty` int(11) DEFAULT NULL,
   `Opisanie` text,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Дамп данных таблицы `vacancy`
@@ -65,9 +91,7 @@ CREATE TABLE IF NOT EXISTS `vacancy` (
 
 INSERT INTO `vacancy` (`ID`, `Nazvanie`, `salary`, `duty`, `Opisanie`) VALUES
 (1, 'Name1', 123, 2, 'Opisanie'),
-(3, 'Name2', 123, 2, 'ererrererr'),
-(4, 'Name3', 233, 3, 'sdsdsd'),
-(5, 'Name4', 133, 3, 'sdsdsd');
+(2, 'name2', 34555, 2, 'работа');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

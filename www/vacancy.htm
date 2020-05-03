@@ -50,7 +50,7 @@
 				};
 
 				var method="PUT";
-				if($("#userModal #operation").val() === 1) {
+				if($("#userModal #operation").val() == 1) {
 					method="PATCH";
 					vacancy_info.ID = $("#user_id").val();
 				}
