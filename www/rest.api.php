@@ -44,7 +44,59 @@ function ReadJob_Openings() {
 
 }
 Flight::route('POST /rest/job_openings',"ReadJob_Openings");
+function ReadVacancyMain() {
+    $data=Array();
 
+    while($row=DBFetchVacancyMain(
+        $_POST["name_search"],
+        $_POST['order']['0']['column'],
+        $_POST['order']['0']['dir'],
+        $_POST['start'],
+        $_POST["length"],
+        $_POST["sal_from_search"],
+        $_POST["sal_to_search"]
+    )){
+        $data[]=Array($row["Nazvanie"], $row["salary"],$row["Opisanie"],$row["dates"]
+           );
+    }
+
+    //Отправка данных клиенту в формате JSON (JavaScript Object Notation)
+    Flight::json(Array(
+        "draw"				=>	intval($_POST["draw"]),
+        "recordsTotal"		=> 	count($data),
+        "recordsFiltered"	=>	DBCountAllVacancy(),
+        "data"				=>	$data
+    ));
+
+}
+Flight::route('POST /rest/vacancy_main',"ReadVacancyMain");
+
+function ReadRezumeMain() {
+    $data=Array();
+
+    while($row=DBFetchRezumeMain(
+        $_POST["name_search"],
+        $_POST['order']['0']['column'],
+        $_POST['order']['0']['dir'],
+        $_POST['start'],
+        $_POST["length"],
+        $_POST["sal_from_search"],
+        $_POST["sal_to_search"]
+    )){
+        $data[]=Array($row["fio"], $row["dolzhnost"],$row["date"],$row["zarplata"],$row["telephone"]
+           );
+    }
+
+    //Отправка данных клиенту в формате JSON (JavaScript Object Notation)
+    Flight::json(Array(
+        "draw"				=>	intval($_POST["draw"]),
+        "recordsTotal"		=> 	count($data),
+        "recordsFiltered"	=>	DBCountAllVacancy(),
+        "data"				=>	$data
+    ));
+
+}
+Flight::route('POST /rest/rezume_main',"ReadRezumeMain");
 function UpdateVacancy() {
     DBUpdateVacancy(
         Flight::request()->data["ID"],
