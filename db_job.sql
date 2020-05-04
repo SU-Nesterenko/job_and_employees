@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 03 2020 г., 19:30
+-- Время создания: Май 04 2020 г., 17:03
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- База данных: `db_job`
 --
+CREATE DATABASE `db_job` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `db_job`;
 
 -- --------------------------------------------------------
 
@@ -82,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `vacancy` (
   `salary` double DEFAULT NULL,
   `duty` int(11) DEFAULT NULL,
   `Opisanie` text,
+  `dates` date NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
@@ -89,9 +92,9 @@ CREATE TABLE IF NOT EXISTS `vacancy` (
 -- Дамп данных таблицы `vacancy`
 --
 
-INSERT INTO `vacancy` (`ID`, `Nazvanie`, `salary`, `duty`, `Opisanie`) VALUES
-(1, 'Name1', 123, 2, 'Opisanie'),
-(2, 'name2', 34555, 2, 'работа');
+INSERT INTO `vacancy` (`ID`, `Nazvanie`, `salary`, `duty`, `Opisanie`, `dates`) VALUES
+(1, 'Name1', 123, 2, 'Opisanie', '2020-05-04'),
+(2, 'name2', 34555, 2, 'работа', '2020-05-04');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
