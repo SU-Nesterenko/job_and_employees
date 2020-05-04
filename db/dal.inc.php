@@ -1,5 +1,51 @@
 <?php require_once("$_SERVER[DOCUMENT_ROOT]/../db/common.dal.inc.php");
 
+function tryLogin($data){
+
+    //return $data["login"] . " | " . $data["password"];
+
+    if(!empty($data["login"]) && !empty($data["password"])) {
+
+        $inputed_login = $data["login"];
+        $inputed_pass = $data["password"];
+
+        $try_login = _DBGetQuery("SELECT * FROM users WHERE Login = '$inputed_login'");
+
+        //return "SELECT * FROM users WHERE Login = '$inputed_login'";
+
+        if($try_login) {
+
+            $db_login = $try_login["Login"];
+            $db_pass = $try_login["Password"];
+
+            //return $db_pass . ' | ' . $inputed_pass;
+
+            if(($inputed_login == $db_login) && ($inputed_pass == $db_pass)) {
+
+                $returned["result"] = true;
+                $returned["message"] = 'Авторизовано';
+                return $returned;
+            }
+            else {
+                $returned["result"] = false;
+                $returned["message"] = 'Не найдена связка логин/пароль';
+                return $returned;
+            }
+        }
+        else {
+            $returned["result"] = false;
+            $returned["message"] = 'Не найдена связка логин/пароль';
+            return $returned;
+        }
+    }
+    else {
+        $returned["result"] = false;
+        $returned["message"] = 'Не все поля заполнены';
+        return $returned;
+    }
+}
+
+
 //CRUD - Create Read Update Delete
 //Создание нового пользователя (Create)
 function DBCreateVacancy($Name,$Cena,$Opisanie,$Rabota) {
@@ -22,6 +68,10 @@ function DBGetVacancyOne($id) {
     $id=(int)$id;
     //Выполнение запроса
     return _DBGetQuery("SELECT * FROM vacancy WHERE ID=$id");
+}
+
+function DBFetchUsers() {
+    return _DBFetchQuery("SELECT * FROM users");
 }
 
 //Получение списка пользователей (Read)
@@ -79,115 +129,7 @@ function DBFetchVacancy($search_string, $sort, $dir, $s, $l, $sal_from = null, $
     //Выполнение запроса
     return _DBFetchQuery("SELECT * FROM vacancy $where_like $order $limit");
 }
-function DBFetchVacancyMain($search_string, $sort, $dir, $s, $l, $sal_from = null, $sal_to = null) {
 
-    //Предотвращение SQL-инъекций
-    $search_string=_DBEscString($search_string);
-    $sort=(int)$sort;
-    $dir=_DBEscString($dir);
-    $s=(int)$s;
-    $l=(int)$l;
-
-    $sal_from=(int)$sal_from;
-    $sal_to=(int)$sal_to;
-
-    //Формирование запроса
-    $limit="LIMIT $s,$l";
-
-    $where_like="";
-    if(trim($search_string)!="") {
-
-        $search_string=_DBEscString($search_string);
-        $where_like="WHERE Nazvanie LIKE \"%$search_string%\"";
-    }
-
-    if ($sal_from && $sal_to){
-        if ($where_like == ""){
-            $where_like .=" WHERE salary BETWEEN $sal_from AND $sal_to";
-        }
-        if ($where_like != ""){
-            $where_like .=" AND salary BETWEEN $sal_from AND $sal_to";
-        }
-    }
-    elseif ($sal_from){
-        if ($where_like == ""){
-            $where_like .=" WHERE salary >= $sal_from";
-        }
-        if ($where_like != ""){
-            $where_like .=" AND salary >= $sal_from";
-        }
-    }
-    elseif ($sal_to){
-        if ($where_like == ""){
-            $where_like .=" WHERE salary <= $sal_to";
-        }
-        if ($where_like != ""){
-            $where_like .=" AND salary <= $sal_to";
-        }
-    }
-
-    $order="";
-    if(trim($sort)!="" && $dir!="")
-        $order="ORDER BY ".((int)$sort+2)." $dir";
-
-    //Выполнение запроса
-    return _DBFetchQuery("SELECT  * FROM vacancy limit 5  " );
-}
-
-function DBFetchRezumeMain($search_string, $sort, $dir, $s, $l, $sal_from = null, $sal_to = null) {
-
-    //Предотвращение SQL-инъекций
-    $search_string=_DBEscString($search_string);
-    $sort=(int)$sort;
-    $dir=_DBEscString($dir);
-    $s=(int)$s;
-    $l=(int)$l;
-
-    $sal_from=(int)$sal_from;
-    $sal_to=(int)$sal_to;
-
-    //Формирование запроса
-    $limit="LIMIT $s,$l";
-
-    $where_like="";
-    if(trim($search_string)!="") {
-
-        $search_string=_DBEscString($search_string);
-        $where_like="WHERE Nazvanie LIKE \"%$search_string%\"";
-    }
-
-    if ($sal_from && $sal_to){
-        if ($where_like == ""){
-            $where_like .=" WHERE salary BETWEEN $sal_from AND $sal_to";
-        }
-        if ($where_like != ""){
-            $where_like .=" AND salary BETWEEN $sal_from AND $sal_to";
-        }
-    }
-    elseif ($sal_from){
-        if ($where_like == ""){
-            $where_like .=" WHERE salary >= $sal_from";
-        }
-        if ($where_like != ""){
-            $where_like .=" AND salary >= $sal_from";
-        }
-    }
-    elseif ($sal_to){
-        if ($where_like == ""){
-            $where_like .=" WHERE salary <= $sal_to";
-        }
-        if ($where_like != ""){
-            $where_like .=" AND salary <= $sal_to";
-        }
-    }
-
-    $order="";
-    if(trim($sort)!="" && $dir!="")
-        $order="ORDER BY ".((int)$sort+2)." $dir";
-
-    //Выполнение запроса
-    return _DBFetchQuery("SELECT  * FROM resume limit 5  " );
-}
 //Подсчёт общего числа пользователей в базе (Read)
 function DBCountAllVacancy() {
     return _DBRowsCount(_DBQuery("SELECT * from vacancy"));
@@ -221,5 +163,40 @@ function DBDeleteVacancy($id) {
 
     //Выполнение запроса
     _DBQuery("DELETE FROM vacancy WHERE id=$id");
+}
+
+//Удаление элемента (Delete)
+function DBDeleteUser($id) {
+    //Предотвращение SQL-инъекций
+    $id=(int)$id;
+
+    //Выполнение запроса
+    _DBQuery("DELETE FROM users WHERE id=$id");
+}
+
+function switchUser($id){
+
+    //Предотвращение SQL-инъекций
+    $id=(int)$id;
+
+    $res = _DBQuery("
+        SELECT isActive
+        FROM users
+        WHERE id =$id"
+    );
+
+    $followingdata = $res->fetch_array(MYSQLI_ASSOC);
+
+    //print_r($followingdata["isActive"]);
+    //return;
+
+    if ($followingdata["isActive"] == 0){
+        _DBQuery("UPDATE users SET isActive = 1 WHERE ID = $id");
+    }
+    else{
+        _DBQuery("UPDATE users SET isActive = 0 WHERE ID = $id");
+    }
+
+    //Выполнение запроса
 }
 

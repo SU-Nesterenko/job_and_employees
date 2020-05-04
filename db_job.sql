@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 04 2020 г., 17:03
+-- Время создания: Май 04 2020 г., 18:55
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- База данных: `db_job`
 --
-CREATE DATABASE `db_job` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `db_job`;
 
 -- --------------------------------------------------------
 
@@ -61,16 +59,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Name` tinytext NOT NULL,
   `Login` varchar(50) NOT NULL,
   `Password` varchar(50) NOT NULL,
+  `isActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`ID`, `Name`, `Login`, `Password`) VALUES
-(1, 'Vasya', 'vasya', '12345'),
-(2, 'Kolya', 'Kolya', '12345');
+INSERT INTO `users` (`ID`, `Name`, `Login`, `Password`, `isActive`) VALUES
+(1, 'Vasya', 'vasya', '12345', 1),
+(2, 'Kolya', 'Kolya', '12345', 0);
 
 -- --------------------------------------------------------
 
@@ -84,17 +83,18 @@ CREATE TABLE IF NOT EXISTS `vacancy` (
   `salary` double DEFAULT NULL,
   `duty` int(11) DEFAULT NULL,
   `Opisanie` text,
-  `dates` date NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Дамп данных таблицы `vacancy`
 --
 
-INSERT INTO `vacancy` (`ID`, `Nazvanie`, `salary`, `duty`, `Opisanie`, `dates`) VALUES
-(1, 'Name1', 123, 2, 'Opisanie', '2020-05-04'),
-(2, 'name2', 34555, 2, 'работа', '2020-05-04');
+INSERT INTO `vacancy` (`ID`, `Nazvanie`, `salary`, `duty`, `Opisanie`) VALUES
+(2, 'name2', 34555, 2, 'работа'),
+(3, 'Name155', 1235555, 2, 'Opisanie55'),
+(4, 'аааа', 45555, 1, 'апапап'),
+(5, 'аааа12', 45555, 1, 'апапап111');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
