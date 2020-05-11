@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 04 2020 г., 18:55
+-- Время создания: Май 11 2020 г., 10:43
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -60,6 +60,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Login` varchar(50) NOT NULL,
   `Password` varchar(50) NOT NULL,
   `isActive` tinyint(1) NOT NULL DEFAULT '1',
+  `RoleID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
@@ -67,9 +68,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`ID`, `Name`, `Login`, `Password`, `isActive`) VALUES
-(1, 'Vasya', 'vasya', '12345', 1),
-(2, 'Kolya', 'Kolya', '12345', 0);
+INSERT INTO `users` (`ID`, `Name`, `Login`, `Password`, `isActive`, `RoleID`) VALUES
+(1, 'Vasya', 'vasya', '12345', 0, 1),
+(2, 'Kolya', 'Kolya', '12345', 1, 1),
+(3, 'antonkornev', 'email@domain.com', '12345', 1, 3);
 
 -- --------------------------------------------------------
 

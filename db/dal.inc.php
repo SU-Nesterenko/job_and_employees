@@ -1,48 +1,14 @@
 <?php require_once("$_SERVER[DOCUMENT_ROOT]/../db/common.dal.inc.php");
 
-function tryLogin($data){
+function DBCheckUser($email){
+    $a=_DBGetQuery("SELECT COUNT(*) As N FROM users WHERE Login='$email'");
+    return $a["N"];
+}
 
-    //return $data["login"] . " | " . $data["password"];
-
-    if(!empty($data["login"]) && !empty($data["password"])) {
-
-        $inputed_login = $data["login"];
-        $inputed_pass = $data["password"];
-
-        $try_login = _DBGetQuery("SELECT * FROM users WHERE Login = '$inputed_login'");
-
-        //return "SELECT * FROM users WHERE Login = '$inputed_login'";
-
-        if($try_login) {
-
-            $db_login = $try_login["Login"];
-            $db_pass = $try_login["Password"];
-
-            //return $db_pass . ' | ' . $inputed_pass;
-
-            if(($inputed_login == $db_login) && ($inputed_pass == $db_pass)) {
-
-                $returned["result"] = true;
-                $returned["message"] = 'Авторизовано';
-                return $returned;
-            }
-            else {
-                $returned["result"] = false;
-                $returned["message"] = 'Не найдена связка логин/пароль';
-                return $returned;
-            }
-        }
-        else {
-            $returned["result"] = false;
-            $returned["message"] = 'Не найдена связка логин/пароль';
-            return $returned;
-        }
-    }
-    else {
-        $returned["result"] = false;
-        $returned["message"] = 'Не все поля заполнены';
-        return $returned;
-    }
+function DBAddUser($username,$email,$password,$roleid) {
+    _DBQuery("
+	INSERT INTO users(Name,Login,Password,RoleID) 
+	VALUES('$username','$email','$password','$roleid')");
 }
 
 
