@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 11 2020 г., 10:43
+-- Время создания: Май 11 2020 г., 13:45
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -19,6 +19,31 @@ SET time_zone = "+00:00";
 --
 -- База данных: `db_job`
 --
+CREATE DATABASE `db_job` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `db_job`;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `advertising`
+--
+
+CREATE TABLE IF NOT EXISTS `advertising` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Nazvanie` varchar(255) NOT NULL,
+  `Opisanie` text NOT NULL,
+  `Tel` int(11) NOT NULL,
+  `Data` date NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Дамп данных таблицы `advertising`
+--
+
+INSERT INTO `advertising` (`ID`, `Nazvanie`, `Opisanie`, `Tel`, `Data`) VALUES
+(1, 'tttt', 'gghh', 12123, '2020-05-12'),
+(2, 'fdfv', 'fdvdf', 12, '2020-05-11');
 
 -- --------------------------------------------------------
 
@@ -84,6 +109,7 @@ CREATE TABLE IF NOT EXISTS `vacancy` (
   `Nazvanie` tinytext,
   `salary` double DEFAULT NULL,
   `duty` int(11) DEFAULT NULL,
+  `date` date NOT NULL,
   `Opisanie` text,
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
@@ -92,11 +118,11 @@ CREATE TABLE IF NOT EXISTS `vacancy` (
 -- Дамп данных таблицы `vacancy`
 --
 
-INSERT INTO `vacancy` (`ID`, `Nazvanie`, `salary`, `duty`, `Opisanie`) VALUES
-(2, 'name2', 34555, 2, 'работа'),
-(3, 'Name155', 1235555, 2, 'Opisanie55'),
-(4, 'аааа', 45555, 1, 'апапап'),
-(5, 'аааа12', 45555, 1, 'апапап111');
+INSERT INTO `vacancy` (`ID`, `Nazvanie`, `salary`, `duty`, `date`, `Opisanie`) VALUES
+(2, 'name2', 34555, 2, '0000-00-00', 'работа'),
+(3, 'Name155', 1235555, 2, '0000-00-00', 'Opisanie55'),
+(4, 'аааа', 45555, 1, '0000-00-00', 'апапап'),
+(5, 'аааа12', 45555, 1, '0000-00-00', 'апапап111');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
