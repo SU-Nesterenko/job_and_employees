@@ -164,12 +164,31 @@ Flight::route('GET /rest/getUsers',"getUsers");
 			"recordsFiltered"	=>	DBCountAllVacancy(),
 			"data"				=>	$data
 	));
-	
+ }
+ 
+  function obyvlenieAll() {
+	$data=Array();
+
+	while($row=DBFetchObyvlenieAll(
+		
+    )){
+		$data[]=Array($row["Nazvanie"], $row["Opisanie"],$row["Data"],$row["Tel"]
+		);	
+	}
+
+	//Отправка данных клиенту в формате JSON (JavaScript Object Notation)
+	Flight::json(Array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"		=> 	count($data),
+			"recordsFiltered"	=>	DBCountAllVacancy(),
+			"data"				=>	$data
+	));
  }
  Flight::route('POST /rest/job_openings',"ReadJob_Openings");
   Flight::route('POST /rest/vacancy_main',"VacancyAll");
   Flight::route('POST /rest/advertising_all',"AdvertisingAll");
     Flight::route('POST /rest/rezume_main',"RezumeAll");
+	Flight::route('POST /rest/obyvlenie_main',"obyvlenieAll");
  
  function UpdateVacancy() {
 	 DBUpdateVacancy(

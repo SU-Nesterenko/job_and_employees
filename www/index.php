@@ -75,6 +75,34 @@
 					},
 				],
 			});
+			
+			var dataTable = $('#obyvlenie_data').DataTable({
+				"sDom": '<"top"i>',
+				"language": {
+					"url":"http://cdn.datatables.net/plug-ins/1.10.20/i18n/Russian.json"
+				},
+				"processing":true,
+				"serverSide":true,
+"bInfo": false,
+"bFilter": false,
+
+				"order":[],
+				"ajax":{
+					data: function (data) {
+						data.name_search = $("#name_search").val();
+						data.sal_from_search = $("#sal_from_search").val();
+						data.sal_to_search = $("#sal_to_search").val();
+					},
+					url:"/rest/obyvlenie_main",
+					type:"POST",
+				},
+				"columnDefs":[
+					{
+						"targets":[0,1, 2], // Столбцы, по которым не нужна сортировка
+						"orderable":false,
+					},
+				],
+			});
 			});
 		
 			</script>
@@ -101,10 +129,10 @@
 				  <a class="nav-link" href="#" data-value="rad">Обявления</a>
 			  </li>
 			  <li class="nav-item">
-				  <a class="nav-link" href="#" data-value="tel">Вход</a>
+				  <a class="nav-link" href="auth_user.php" data-value="tel">Вход</a>
 			  </li>
 			  <li class="nav-item">
-				  <a class="nav-link" href="#" data-value="red">Регистрация</a>
+				  <a class="nav-link" href="reg_user.php" data-value="red">Регистрация</a>
 			  </li>
 		  </ul>
 	  </div>
@@ -135,7 +163,8 @@
 <!-- Posts section -->
 <div class="blog" id="IT">
 	<div class="container">
-	<h1 class="left">Вакансии</h1>
+	<a class="nav-link" href="list.php" id="home"><h1 class="left">Вакансии</h1></a>
+	
 		<div class="row">
 		
 			<div class="col-md-12 col-lg-12 col-sm-4">
@@ -159,7 +188,8 @@
 
 <div class="blog" id="mag">
 	<div class="container">
-	<h1 class="left">Резюме</h1>
+	<a class="nav-link" href="allresume.php" id="home"><h1 class="left">Резюме</h1></a>
+	
 		<div class="row">
 		
 			<div class="col-md-12 col-lg-12 col-sm-12">
@@ -187,13 +217,17 @@
 		<div class="row">
 		
 			<div class="col-md-12 col-lg-12 col-sm-12">
-				<table id="rezume_data" class="table table-bordered table-striped">
-		Здесь будут объявления
-</div>
-			</div>
+				<table id="obyvlenie_data" class="table table-bordered table-striped">
+		<thead>
+		<tr>
+			<th width="10%">Наименование</th>
+			<th width="10%">Описание</th>
+			<th width="10%">Дата</th>
+			<th width="10%">Телефон</th>
 			
-		</div>
-	</div>
+		</tr>
+		</thead>
+	</table>
 </div>
 
 

@@ -63,7 +63,9 @@ function DBFetchVacancyAll() {
 function DBFetchRezumeAll() {
     return _DBFetchQuery("SELECT * FROM resume");
 }
-
+function DBFetchObyvlenieAll() {
+    return _DBFetchQuery("SELECT * FROM advertising");
+}
 //Получение списка пользователей (Read)
 function DBFetchVacancy($search_string, $sort, $dir, $s, $l, $sal_from = null, $sal_to = null) {
 
