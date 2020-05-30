@@ -148,7 +148,7 @@ function DBFetchAdvertisingAll($search_string, $sort, $dir, $s, $l, $sal_from = 
         $where_like="WHERE Nazvanie LIKE \"%$search_string%\"";
     }
 
-    if ($sal_from && $sal_to){
+    /*if ($sal_from && $sal_to){
         if ($where_like == ""){
             $where_like .=" WHERE salary BETWEEN $sal_from AND $sal_to";
         }
@@ -171,7 +171,7 @@ function DBFetchAdvertisingAll($search_string, $sort, $dir, $s, $l, $sal_from = 
         if ($where_like != ""){
             $where_like .=" AND salary <= $sal_to";
         }
-    }
+    }*/
 
     $order="";
     if(trim($sort)!="" && $dir!="")

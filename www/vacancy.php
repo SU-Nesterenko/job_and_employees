@@ -2,7 +2,10 @@
 
     require_once("../auth/auth.inc.php");
 
-    if(!user_is_employer() || !user_is_admin()) exit();
+    if(!user_is_employer() && !user_is_admin()) {
+        exit();
+    }
+
 ?>
 
 

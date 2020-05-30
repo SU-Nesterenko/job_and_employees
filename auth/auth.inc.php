@@ -13,7 +13,7 @@
 	}
 	
 	function auth_user($login,$password) {
-		require_once("../db/common.dal.inc.php");
+		//require_once("../db/common.dal.inc.php");
 		$user_login=_DBEscString($login);
 		$user_password=/*md5*/(_DBEscString($password));
 		

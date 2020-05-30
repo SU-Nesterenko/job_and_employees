@@ -2,7 +2,7 @@
 
     require_once("../auth/auth.inc.php");
 
-    if(!user_is_advertiser() || !user_is_admin()) exit();
+    if(!user_is_advertiser() && !user_is_admin()) exit();
 ?>
 
 <!DOCTYPE html>
