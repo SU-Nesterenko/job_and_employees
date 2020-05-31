@@ -186,7 +186,7 @@ function DBCountAdvertisingAll() {
     return _DBRowsCount(_DBQuery("SELECT * from advertising"));
 }
 //Редактирование элемента (Update)
-function DBUpdateVacancy($id,$Name,$Cena,$Opisanie,$Rabota) {
+function DBUpdateVacancy($id,$Name,$Cena,$Opisanie,$Rabota, $opit, $city) {
     //Предотвращение SQL-инъекций
     $id=(int)$id;
     $Name=_DBEscString($Name);
@@ -200,7 +200,9 @@ function DBUpdateVacancy($id,$Name,$Cena,$Opisanie,$Rabota) {
 		SET	Nazvanie='$Name',
 		salary='$Cena',
 		duty='$Rabota',
-		Opisanie='$Opisanie'
+		Opisanie='$Opisanie',
+		opit='$opit',
+		city='$city'
 		WHERE 
 			ID=$id
 	");

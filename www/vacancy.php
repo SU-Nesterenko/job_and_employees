@@ -5,7 +5,6 @@
     if(!user_is_employer() && !user_is_admin()) {
         exit();
     }
-
 ?>
 
 
@@ -57,7 +56,9 @@
 					"Naizvanie":$("#Naizvanie").val(),
 					"Cena":$("#zar").val(),
 					"Opisanie":$("#Opisanie").val(),
-					"rabota":$("#myselect").val()
+					"rabota":$("#myselect").val(),
+                    "opit":$("#opit").val(),
+                    "city":$("#city").val()
 				};
 
 				var method="PUT";
@@ -95,12 +96,15 @@
 						$("#myselect option[value='"+data.duty+"']").prop('selected', true);
 
 						//Заголовок окна
-						$('.modal-title').text("Редактировать товар");
+						$('.modal-title').text("Редактировать вакансию");
 
 						$("#userModal #Naizvanie").val(data.Nazvanie);
 						$("#userModal #zar").val(data.salary);
 						$('#userModal #Opisanie').val(data.Opisanie);
 						$('#userModal #user_id').val(id);
+                        $("#userModal #opit").val(data.opit);
+                        $('#userModal #datedd').val(data.date);
+                        $('#userModal #city').val(data.city);
 
 						//Флаг операции (1 - редактирование)
 						$("#userModal #operation").val("1");
@@ -238,6 +242,14 @@
 				</div>
 				<div class="modal-body" >
 
+                    <div class="form-group">
+
+                        <label class="col-sm-4 control-label" for="datedd">Дата создания</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="datedd" id="datedd" class="form-control" disabled/>
+                        </div>
+                    </div>
+
 					<div class="form-group">
 
 						<label class="col-sm-4 control-label" for="Naizvanie">Заголовок</label>
@@ -252,6 +264,21 @@
 							<input type="text" name="zar" id="zar" class="form-control" />
 						</div>
 					</div>
+
+                    <div class="form-group">
+
+                        <label class="col-sm-4 control-label" for="opit">Опыт работы</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="opit" id="opit" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label class="col-sm-4 control-label" for="city">Город</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="city" id="city" class="form-control" />
+                        </div>
+                    </div>
 
 					<div class="form-group">
 						<label class="col-sm-4 control-label" >Режим работы</label>

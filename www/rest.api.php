@@ -196,7 +196,9 @@ Flight::route('GET /rest/getUsers',"getUsers");
 		Flight::request()->data["Naizvanie"],
 		Flight::request()->data["Cena"],
 		Flight::request()->data["Opisanie"],
-		Flight::request()->data["rabota"]
+		Flight::request()->data["rabota"],
+        Flight::request()->data["opit"],
+        Flight::request()->data["city"]
 	);
  }
  Flight::route('PATCH /rest/vacancy',"UpdateVacancy");

@@ -265,8 +265,6 @@
         width: 100%;
     }
 
-
-
     /* OTHERS */
 
     *:focus {
