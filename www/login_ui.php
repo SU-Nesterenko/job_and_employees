@@ -1,4 +1,4 @@
-<form name="myForm" action="auth/user_login.php" method="POST">
+<form name="myForm" action="auth/user_login.php" method="POST" style="margin-left: 15px">
     Логин: <br/>
     <input name="user_login" type="text" ng-model="user.Login" required/><br/>
     Пароль:<br/>

@@ -1,4 +1,4 @@
-<form name="myForm" action="auth/reg.php" method="POST">
+<form name="myForm" action="auth/reg.php" method="POST"  style="margin-left: 15px">
     Ваше полное имя:<br/>
     <input id="f_fullname" name="f_fullname" type="text" size="50" ng-model="user.name" required/><br/>
     Email:<br/>
