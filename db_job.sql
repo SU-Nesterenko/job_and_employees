@@ -111,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `vacancy` (
   `duty` int(11) DEFAULT NULL,
   `date` date NOT NULL,
   `Opisanie` text,
+  `isActive` tinyint(1) NOT NULL DEFAULT 'true',
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
@@ -118,11 +119,11 @@ CREATE TABLE IF NOT EXISTS `vacancy` (
 -- Дамп данных таблицы `vacancy`
 --
 
-INSERT INTO `vacancy` (`ID`, `Nazvanie`, `salary`, `duty`, `date`, `Opisanie`) VALUES
-(2, 'name2', 34555, 2, '0000-00-00', 'работа'),
-(3, 'Name155', 1235555, 2, '0000-00-00', 'Opisanie55'),
-(4, 'аааа', 45555, 1, '0000-00-00', 'апапап'),
-(5, 'аааа12', 45555, 1, '0000-00-00', 'апапап111');
+INSERT INTO `vacancy` (`ID`, `Nazvanie`, `salary`, `duty`, `date`, `Opisanie`, 'true') VALUES
+(2, 'name2', 34555, 2, '0000-00-00', 'работа', 'true'),
+(3, 'Name155', 1235555, 2, '0000-00-00', 'Opisanie55', 'true'),
+(4, 'аааа', 45555, 1, '0000-00-00', 'апапап', 'true'),
+(5, 'аааа12', 45555, 1, '0000-00-00', 'апапап111', 'true');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
